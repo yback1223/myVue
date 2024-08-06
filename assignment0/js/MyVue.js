@@ -26,6 +26,7 @@ new Vue({
 				return;
 			} 
 			this.todos.unshift(todoItem);
+			document.getElementById('todoInput').value ='';
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
 		removeTodo(i) {
@@ -39,7 +40,7 @@ new Vue({
 		destroyInstance() {
 			console.warn('%c인스턴스가 폭파됩니다.', 'background: red; color: white');
 			this.$destroy();
-		}
+		},
 	},
 	beforeCreate() {
 		logLifecycleHook('beforeCreate');
