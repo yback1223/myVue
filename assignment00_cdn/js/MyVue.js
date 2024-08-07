@@ -27,14 +27,14 @@ new Vue({
 			this.todos.splice(i, 1);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
-		clearList() {
-			this.todos.splice(0);
-			localStorage.clear();
-		},
-		destroyInstance() {
-			console.warn('%c인스턴스가 폭파됩니다.', 'background: red; color: white');
-			this.$destroy();
-		},
+		// clearList() {
+		// 	this.todos.splice(0);
+		// 	localStorage.clear();
+		// },
+		// destroyInstance() {
+		// 	console.warn('%c인스턴스가 폭파됩니다.', 'background: red; color: white');
+		// 	this.$destroy();
+		// },
 	},
 	beforeCreate() {
 		logLifecycleHook('beforeCreate');
