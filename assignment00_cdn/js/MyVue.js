@@ -12,6 +12,8 @@ new Vue({
 	data: {
 		todos: JSON.parse(localStorage.getItem("todos")) || [],
 		todoInput: '',
+		checkedItem: [],
+		index: 0,
 	},
 	methods: {
 		addTodo() {
@@ -19,7 +21,11 @@ new Vue({
 				window.alert("할 일을 입력하세요!");
 				return;
 			} 
-			this.todos.push(this.todoInput);
+			var input = {
+				'index': this.index++,
+				'label': this.todoInput,
+			};
+			this.todos.push(input);
 			this.todoInput = '';
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
@@ -27,10 +33,11 @@ new Vue({
 			this.todos.splice(i, 1);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
-		// clearList() {
-		// 	this.todos.splice(0);
-		// 	localStorage.clear();
-		// },
+		deleteChecked() {
+			this.todos = this.todos.filter(todo => !this.checkedItem.includes(todo.index));
+			this.checkedItem.length = 0;
+			localStorage.setItem('todos', JSON.stringify(this.todos));
+		},
 		// destroyInstance() {
 		// 	console.warn('%c인스턴스가 폭파됩니다.', 'background: red; color: white');
 		// 	this.$destroy();

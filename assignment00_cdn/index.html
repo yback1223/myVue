@@ -15,12 +15,14 @@
 
 		<ul class="todoList">
 			<li v-for="(todo, i) in todos" :key="i">
-				<span> {{ todo }} </span> <button @click="removeTodo(i)">삭제</button>
+				<input type="checkbox" v-model="checkedItem" :value="todo.index">
+				<span> {{ todo.label }} </span>
+				<button @click="removeTodo(i)">삭제</button>
 			</li>
 		</ul>
 
-		<!-- <button @click="clearList()">전체 삭제</button>
-		<button @click="destroyInstance()">인스턴스 폭파</button> -->
+		<button @click="deleteChecked">체크 삭제</button>
+		<!-- <button @click="destroyInstance()">인스턴스 폭파</button> -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
