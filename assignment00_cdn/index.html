@@ -14,10 +14,10 @@
 		</div>
 
 		<ul class="todoList">
-			<li v-for="(todo, i) in todos" :key="i">
+			<li v-for="(todo) in todos" :key="todo.index">
 				<input type="checkbox" v-model="checkedItem" :value="todo.index">
 				<span> {{ todo.label }} </span>
-				<button @click="removeTodo(i)">삭제</button>
+				<button @click="removeTodo(todo.index)">삭제</button>
 			</li>
 		</ul>
 

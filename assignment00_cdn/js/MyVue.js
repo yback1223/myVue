@@ -27,15 +27,19 @@ new Vue({
 			};
 			this.todos.push(input);
 			this.todoInput = '';
+			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
-		removeTodo(i) {
-			this.todos.splice(i, 1);
+		removeTodo(todoItemIndex) {
+			const itemIndex = this.todos.findIndex((item) => item.id === todoItemIndex);
+			this.todos.splice(itemIndex, 1);
+			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
 		deleteChecked() {
 			this.todos = this.todos.filter(todo => !this.checkedItem.includes(todo.index));
 			this.checkedItem.length = 0;
+			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
 		// destroyInstance() {
