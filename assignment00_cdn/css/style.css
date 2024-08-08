@@ -1,12 +1,22 @@
 ul {
-	list-style-type: "📌";
+	list-style-type: "🔮";
 }
 
 input.todoCheckBox {
 	width: 20px;
 	height: 20px;
 	/* border: 1px solid #e564ec; */
-	accent-color: #f2ff00;
+	accent-color: #c400ff;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input.todoCheckBox:checked {
+	content:'✔';
+	width: 20px;
+	height: 20px;
+	/* border: 1px solid #e564ec; */
+	accent-color: #c400ff;
 	border-radius: 4px;
 	cursor: pointer;
 }

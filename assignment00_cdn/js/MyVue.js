@@ -31,8 +31,8 @@ new Vue({
 			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
-		removeTodo(todoItemIndex) {
-			const itemIndex = this.todos.findIndex((item) => item.id === todoItemIndex);
+		deleteTodo(todoItemIndex) {
+			const itemIndex = this.todos.findIndex((item) => item.index === todoItemIndex);
 			this.todos.splice(itemIndex, 1);
 			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
