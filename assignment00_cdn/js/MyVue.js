@@ -13,7 +13,7 @@ new Vue({
 		todos: JSON.parse(localStorage.getItem("todos")) || [],
 		todoInput: '',
 		checkedItem: [],
-		index: 0,
+		index: localStorage.getItem("index") || 0,
 	},
 	methods: {
 		addTodo() {
@@ -25,6 +25,7 @@ new Vue({
 				'index': this.index++,
 				'label': this.todoInput,
 			};
+			localStorage.setItem('index', this.index);
 			this.todos.push(input);
 			this.todoInput = '';
 			console.log(this.todos);
@@ -38,7 +39,13 @@ new Vue({
 		},
 		deleteChecked() {
 			this.todos = this.todos.filter(todo => !this.checkedItem.includes(todo.index));
-			this.checkedItem.length = 0;
+			this.checkedItem = [];
+			console.log(this.todos);
+			localStorage.setItem('todos', JSON.stringify(this.todos));
+		},
+		deleteAll() {
+			this.todos = [];
+			this.checkedItem = [];
 			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},

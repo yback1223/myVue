@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
     <title>Getting Started</title>
   </head>
   <body>
@@ -10,18 +11,19 @@
     <div id="app">
 		<div>
 			<input @keyup.enter="addTodo" type="text" v-model.trim="todoInput" placeholder="할 일을 입력하세요.">
-			<button  @click="addTodo">등록</button>
+			<button class="submitButton" @click="addTodo">등록</button>
 		</div>
 
 		<ul class="todoList">
 			<li v-for="(todo) in todos" :key="todo.index">
-				<input type="checkbox" v-model="checkedItem" :value="todo.index">
+				<input class="todoCheckBox" type="checkbox" v-model="checkedItem" :value="todo.index">
 				<span> {{ todo.label }} </span>
-				<button @click="removeTodo(todo.index)">삭제</button>
+				<button class="deleteOne" @click="removeTodo(todo.index)">삭제</button>
 			</li>
 		</ul>
 
 		<button @click="deleteChecked">체크 삭제</button>
+		<button @click="deleteAll">전체 삭제</button>
 		<!-- <button @click="destroyInstance()">인스턴스 폭파</button> -->
     </div>
 

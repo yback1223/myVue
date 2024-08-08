@@ -1,0 +1,53 @@
+ul {
+	list-style-type: "📌";
+}
+
+input.todoCheckBox {
+	width: 20px;
+	height: 20px;
+	/* border: 1px solid #e564ec; */
+	accent-color: #f2ff00;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+span {
+	color: #c400ff;
+}
+
+h1 {
+	color: #c400ff;
+}
+
+button {
+    top:50%;
+    background-color:#c400ff;
+    color: #fffb01;
+    border:none;
+    /* border-radius:10px; */
+    box-shadow: 0px 0px 2px 2px #c400ff;
+}
+
+button:hover {
+	background-color:#c400ff;
+	transition: 0.7s;
+}
+
+button:active {
+	background-color: #c0eeff;
+}
+
