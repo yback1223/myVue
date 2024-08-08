@@ -31,29 +31,34 @@ new Vue({
 			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
+
 		deleteTodo(todoItemIndex) {
 			const itemIndex = this.todos.findIndex((item) => item.index === todoItemIndex);
 			this.todos.splice(itemIndex, 1);
 			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
+
 		deleteChecked() {
 			this.todos = this.todos.filter(todo => !this.checkedItem.includes(todo.index));
 			this.checkedItem = [];
 			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
+
 		deleteAll() {
 			this.todos = [];
 			this.checkedItem = [];
 			console.log(this.todos);
 			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
+
 		// destroyInstance() {
 		// 	console.warn('%c인스턴스가 폭파됩니다.', 'background: red; color: white');
 		// 	this.$destroy();
 		// },
 	},
+	
 	beforeCreate() {
 		logLifecycleHook('beforeCreate');
 	},
