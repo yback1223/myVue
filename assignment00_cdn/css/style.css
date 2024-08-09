@@ -6,7 +6,7 @@ input.todoCheckBox {
 	width: 20px;
 	height: 20px;
 	/* border: 1px solid #e564ec; */
-	accent-color: #c400ff;
+	accent-color: #000000;
 	border-radius: 4px;
 	cursor: pointer;
 	text-align: center;
@@ -17,7 +17,7 @@ input.todoCheckBox:checked {
 	width: 20px;
 	height: 20px;
 	/* border: 1px solid #e564ec; */
-	accent-color: #c400ff;
+	accent-color: #000000;
 	border-radius: 4px;
 	cursor: pointer;
 }
@@ -32,7 +32,7 @@ html {
 }
 
 body {
-	background: grey;
+	background: rgb(0, 0, 0);
     /* display: table-cell; */
     vertical-align: middle;
 }
@@ -40,17 +40,18 @@ body {
 input.todoInput {
 	width: 90%;
 	border: 0;
-	background-color: rgb(145, 215, 255);
+	background-color: rgb(255, 255, 255);
 	border-radius: 5px;
 
 }
 
 .tabClicked {
-	background: rgb(127, 55, 186);
+	background: rgb(0, 0, 0);
+	color: rgb(255, 255, 255)
 }
 
 table.todoList {
-	background: rgb(202, 198, 198);
+	background: rgb(255, 255, 255);
 	width: 100%;
 }
 
@@ -62,7 +63,7 @@ button:active {
 
 
 tr:hover {
-	background-color: rgb(253, 216, 202);
+	background-color: rgb(0, 0, 0);
 }
 
 th.status {
@@ -75,11 +76,12 @@ th.content {
 
 th {
 	height: 70px;
-	background: rgb(239, 140, 140);
+	background: rgb(0, 0, 0);
+	color: white;
 }
 
 .todoSpan {
-	color: #c400ff;
+	color: #ff0000;
 }
 
 .todoDone {
@@ -88,7 +90,7 @@ th {
 }
 
 h1 {
-	color: #c400ff;
+	color: #ffffff;
 }
 
 button.buttonSubmit {
@@ -135,7 +137,7 @@ button.buttonModifyComplete {
     border:none;
     border-radius:10%;
 	cursor: pointer;
-	background: url( "https://img.icons8.com/?size=100&id=11695&format=png" ) no-repeat;
+	background: url( "https://img.icons8.com/?size=160&id=u6BofCIYf5rg&format=png" ) no-repeat;
 	background-size: contain;
 }
 
