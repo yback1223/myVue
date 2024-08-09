@@ -36,10 +36,6 @@ body {
     vertical-align: middle;
 }
 
-html:hover, body:hover {
-	background: rgb(124, 124, 124);
-}
-
 input.todoInput {
 	width: 90%;
 	border: 0;
