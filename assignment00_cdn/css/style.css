@@ -9,6 +9,7 @@ input.todoCheckBox {
 	accent-color: #c400ff;
 	border-radius: 4px;
 	cursor: pointer;
+	text-align: center;
 }
 
 input.todoCheckBox:checked {
@@ -31,35 +32,113 @@ html {
 }
 
 body {
-    display: table-cell;
+	background: grey;
+    /* display: table-cell; */
     vertical-align: middle;
 }
 
-span {
+input.todoInput {
+	width: 90%;
+	border: 0;
+	background-color: rgb(145, 215, 255);
+	border-radius: 5px;
+
+}
+
+.tabClicked {
+	background: rgb(127, 55, 186);
+}
+
+table.todoList {
+	background: rgb(202, 198, 198);
+	width: 100%;
+}
+
+
+
+tr:hover {
+	background-color: rgb(253, 216, 202);
+}
+
+th.status {
+	width: 50px;
+}
+
+th.content {
+	width: 500px;
+}
+
+th {
+	height: 70px;
+	background: rgb(239, 140, 140);
+}
+
+.todoSpan {
 	color: #c400ff;
+}
+
+.todoDone {
+	color: grey;
+	text-decoration: line-through;
 }
 
 h1 {
 	color: #c400ff;
 }
 
-button {
-    top:50%;
-    background-color:#c400ff;
-    color: #fffb01;
+button.buttonSubmit {
+    width: 2rem;
+    height: 2rem;
     border:none;
-    /* border-radius:10px; */
-    box-shadow: 0px 0px 2px 2px #c400ff;
+    border-radius:10%;
 	cursor: pointer;
-
+	float: right;
+	background: url( "https://cdn-icons-png.flaticon.com/128/2680/2680985.png" ) no-repeat;
+	background-size: contain;
 }
 
-button:hover {
-	background-color:#c400ff;
-	transition: 0.7s;
+button.buttonDeleteOne {
+    width: 2rem;
+    height: 2rem;
+    border:none;
+    border-radius:10%;
+	cursor: pointer;
+	float: right;
+	background: url( "https://cdn-icons-png.flaticon.com/128/8661/8661494.png" ) no-repeat;
+	background-size: contain;
 }
 
-button:active {
-	background-color: #c0eeff;
+button.buttonDeleteAll {
+	cursor: pointer;
+	float: right;
 }
 
+button.buttonModify {
+    width: 2rem;
+    height: 2rem;
+    border:none;
+    border-radius:10%;
+	cursor: pointer;
+	float: right;
+	background: url( "https://cdn-icons-png.flaticon.com/128/1046/1046244.png" ) no-repeat;
+	background-size: contain;
+}
+
+button.buttonModifyComplete {
+	width: 1.2rem;
+    height: 1.2rem;
+    border:none;
+    border-radius:10%;
+	cursor: pointer;
+	background: url( "https://img.icons8.com/?size=100&id=11695&format=png" ) no-repeat;
+	background-size: contain;
+}
+
+h1.noTodo {
+	color: white;
+	text-align: center;
+}
+
+input.inputModify {
+	width: 80%;
+}

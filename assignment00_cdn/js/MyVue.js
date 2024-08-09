@@ -10,54 +10,75 @@ function logLifecycleHook(hook) {
 new Vue({
 	el: '#app',
 	data: {
+		tabList: [
+			{
+				id: 0,
+				label: '전체',
+			},
+			{
+				id: 1,
+				label: '미완료',
+			},
+			{
+				id: 2,
+				label: '완료',
+			},
+		],
+		currentTabLabel: '전체',
 		todos: JSON.parse(localStorage.getItem("todos")) || [],
 		todoInput: '',
-		checkedItem: [],
 		index: localStorage.getItem("index") || 0,
 	},
+
 	methods: {
 		addTodo() {
-			if (this.todoInput === '') {
+			if (this.todoInput.trim() === '') {
 				window.alert("할 일을 입력하세요!");
 				return;
 			} 
 			var input = {
 				'index': this.index++,
-				'label': this.todoInput,
+				'label': this.todoInput.trim(),
+				'status': false,
+				'modify': false,
 			};
 			localStorage.setItem('index', this.index);
 			this.todos.push(input);
 			this.todoInput = '';
-			console.log(this.todos);
-			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
 
 		deleteTodo(todoItemIndex) {
 			const itemIndex = this.todos.findIndex((item) => item.index === todoItemIndex);
 			this.todos.splice(itemIndex, 1);
-			console.log(this.todos);
-			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
 
 		deleteChecked() {
-			this.todos = this.todos.filter(todo => !this.checkedItem.includes(todo.index));
-			this.checkedItem = [];
-			console.log(this.todos);
-			localStorage.setItem('todos', JSON.stringify(this.todos));
+			this.todos = this.todos.filter(todo => !todo.status);
 		},
 
 		deleteAll() {
 			this.todos = [];
-			this.checkedItem = [];
-			console.log(this.todos);
-			localStorage.setItem('todos', JSON.stringify(this.todos));
 		},
-
-		// destroyInstance() {
-		// 	console.warn('%c인스턴스가 폭파됩니다.', 'background: red; color: white');
-		// 	this.$destroy();
-		// },
 	},
+
+	computed: {
+		currentList() {
+			if (this.currentTabLabel === '전체') return this.todos;
+			else if (this.currentTabLabel === '미완료') return this.todos.filter(todo => !todo.status);
+			return this.todos.filter(todo => todo.status);
+		}
+	},
+	
+	watch: {
+		todos: {
+			handler(newTodos) {
+				localStorage.setItem('todos', JSON.stringify(newTodos));
+				logLifecycleHook('updated');
+			},
+			deep: true
+		}
+	},
+	
 	
 	beforeCreate() {
 		logLifecycleHook('beforeCreate');

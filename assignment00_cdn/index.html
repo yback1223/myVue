@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="css/style.css">
 		<title>yback todolist cdn</title>
@@ -9,44 +9,96 @@
 	<body>
 		<h1>Todo List</h1>
 		<div id="app">
-		<div>
-			<input 
-				@keyup.enter="addTodo"
-				type="text"
-				v-model.trim="todoInput"
-				placeholder="할 일을 입력하세요."
-			>
-			<button 
-				class="submitButton"
-				@click="addTodo"
-			>
-				등록
-			</button>
-		</div>
+			<div>
+				<input 
+					class="todoInput"
+					@keyup.enter="addTodo"
+					type="text"
+					v-model.lazy="todoInput"
+					placeholder=" 할 일을 입력하세요."
+				>
+				<button 
+					class="buttonSubmit"
+					@click="addTodo"
+				></button>
+			</div>
 
-		<ul class="todoList">
-			<li 
-				v-for="(todo) in todos"
-				:key="todo.index"
-			>
-			<input
-				class="todoCheckBox"
-				type="checkbox"
-				v-model="checkedItem"
-				:value="todo.index"
-			>
-			<span>{{ todo.label }}</span>
+			<div class="tabs">
+				<button
+					v-for="tab in tabList" :key="tab.id"
+					@click.prevent="currentTabLabel = tab.label"
+					:class="{ tabClicked : currentTabLabel === tab.label }"
+				>
+					{{ tab.label }}
+				</button>
+			</div>
+
+			<table class="todoList">
+				<tr class="trContentsInfo">
+					<th class="status">상태</th>
+					<th class="content">내용</th>
+				</tr>
+				<tr 
+					class="trContents"				
+					v-for="todo in currentList"
+					:key="todo.index">
+					<td class="tdContentInfo">
+						<input
+							class="todoCheckBox"
+							type="checkbox"
+							v-model="todo.status"
+						>
+					</td>
+					<td class="tdContent">
+						<span
+							:class="{todoDone : todo.status, todoSpan : !todo.status}"
+							v-if="todo.modify === false"
+						>
+							{{ todo.label }}
+						</span>
+						<input
+							class="inputModify"
+							v-if="todo.modify === true"
+							v-model.lazy="todo.label"
+							@keyup.enter="todo.modify = false"
+						>
+						<button 
+							class="buttonModifyComplete"
+							v-if="todo.modify === true"
+							@click="todo.modify = false"
+						>
+						</button>
+						<button
+							class="buttonDeleteOne"
+							@click="deleteTodo(todo.index)"
+						></button>
+						<button
+							class="buttonModify"
+							@click="todo.modify = !todo.modify"
+						></button>
+
+					</td>
+				</tr>
+			</table>
+
 			<button
-				class="deleteOne"
-				@click="deleteTodo(todo.index)"
+				@click="deleteChecked"
+				v-if="currentTabLabel != '미완료'"
 			>
-				삭제
+				체크 삭제
 			</button>
-			</li>
-		</ul>
-
-		<button @click="deleteChecked">체크 삭제</button>
-		<button @click="deleteAll">전체 삭제</button>
+			<button 
+				class="buttonDeleteAll" 
+				@click="deleteAll"
+			>
+				전체 삭제
+			</button>
+			<h1
+				class="noTodo"
+				v-if="todos.length === 0"
+			>
+				할! 일이 없습니다!
+			</h1>
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
