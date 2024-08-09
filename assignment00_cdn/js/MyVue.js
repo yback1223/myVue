@@ -59,6 +59,14 @@ new Vue({
 		deleteAll() {
 			this.todos = [];
 		},
+
+		modifyComplete() {
+			if (this.todoInput.trim() === '') {
+				window.alert("입력란을 채워주세요!");
+				return;
+			}
+			todo.modify = false;
+		},
 	},
 
 	computed: {

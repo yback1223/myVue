@@ -60,12 +60,12 @@
 							class="inputModify"
 							v-if="todo.modify === true"
 							v-model.lazy="todo.label"
-							@keyup.enter="todo.modify = false"
+							@keyup.enter="modifyComplete"
 						>
 						<button 
 							class="buttonModifyComplete"
 							v-if="todo.modify === true"
-							@click="todo.modify = false"
+							@click="modifyComplete"
 						>
 						</button>
 						<button
