@@ -27,7 +27,7 @@
 				<button
 					v-for="tab in tabList" :key="tab.id"
 					@click.prevent="currentTabLabel = tab.label"
-					:class="{ tabClicked : currentTabLabel === tab.label }"
+					:class="{ tabClicked: currentTabLabel === tab.label }"
 				>
 					{{ tab.label }}
 				</button>
@@ -51,7 +51,7 @@
 					</td>
 					<td class="tdContent">
 						<span
-							:class="{todoDone : todo.status, todoSpan : !todo.status}"
+							:class="{ todoDone : todo.status, todoSpan : !todo.status }"
 							v-if="todo.modify === false"
 						>
 							{{ todo.label }}

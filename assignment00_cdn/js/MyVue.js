@@ -11,18 +11,9 @@ new Vue({
 	el: '#app',
 	data: {
 		tabList: [
-			{
-				id: 0,
-				label: '전체',
-			},
-			{
-				id: 1,
-				label: '미완료',
-			},
-			{
-				id: 2,
-				label: '완료',
-			},
+			{ id: 0, label: '전체' },
+			{ id: 1, label: '미완료' },
+			{ id: 2, label: '완료' },
 		],
 		currentTabLabel: '전체',
 		todos: JSON.parse(localStorage.getItem("todos")) || [],
@@ -33,42 +24,36 @@ new Vue({
 
 	methods: {
 		addTodo() {
-			if (this.todoInput.trim() === '') {
-				window.alert("할 일을 입력하세요!");
+			if (!this.todoInput.trim()) {
+				alert("할 일을 입력하세요!");
 				return;
-			} 
-			var input = {
-				'index': this.index++,
-				'label': this.todoInput.trim(),
-				'status': false,
-				'modify': false,
-			};
+			}
+			this.todos.push({
+				index: this.index++,
+				label: this.todoInput.trim(),
+				status: false,
+				modify: false,
+			});
 			localStorage.setItem('index', this.index);
-			this.todos.push(input);
 			this.todoInput = '';
 		},
-
-		deleteTodo(todoItemIndex) {
-			const itemIndex = this.todos.findIndex((item) => item.index === todoItemIndex);
-			this.todos.splice(itemIndex, 1);
+		deleteTodo(todoIndex) {
+			this.todos = this.todos.filter(todo => todo.index !== todoIndex);
 		},
 
 		deleteChecked() {
 			this.todos = this.todos.filter(todo => !todo.status);
 		},
-
 		deleteAll() {
 			this.todos = [];
 		},
-
-		modifyComplete(todoLabel) {
-			if (todoLabel.trim() === '') {
+		modifyComplete(todo) {
+			if (!todo.trim()) {
 				window.alert("입력란을 채워주세요!");
 				return true;
 			}
 			return false;
 		},
-
 		clickModifyButton(todoLabel, modifyStatus) {
 			if (modifyStatus && todoLabel.trim() != '') return false;
 			return true; 
