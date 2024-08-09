@@ -56,7 +56,7 @@ table.todoList {
 }
 
 button:active {
-	box-shadow: 2px 2px 0 rgba(253, 1, 1, 0.5);
+	box-shadow: 2px 2px 0 rgb(255, 255, 255);
 	position: relative;
 	top:2px;
 }

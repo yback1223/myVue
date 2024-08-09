@@ -60,12 +60,12 @@
 							class="inputModify"
 							v-if="todo.modify === true"
 							v-model.lazy="todo.label"
-							@keyup.enter="modifyComplete"
+							@keyup.enter="todo.modify = modifyComplete(todo.label)"
 						>
 						<button 
 							class="buttonModifyComplete"
 							v-if="todo.modify === true"
-							@click="modifyComplete"
+							@click="todo.modify = modifyComplete(todo.label)"
 						>
 						</button>
 						<button
@@ -74,7 +74,7 @@
 						></button>
 						<button
 							class="buttonModify"
-							@click="todo.modify = !todo.modify"
+							@click="todo.modify = clickModifyButton(todo.label, todo.modify)"
 						></button>
 
 					</td>

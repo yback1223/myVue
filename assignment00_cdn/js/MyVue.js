@@ -27,6 +27,7 @@ new Vue({
 		currentTabLabel: '전체',
 		todos: JSON.parse(localStorage.getItem("todos")) || [],
 		todoInput: '',
+		modifyInput: '',
 		index: localStorage.getItem("index") || 0,
 	},
 
@@ -60,12 +61,17 @@ new Vue({
 			this.todos = [];
 		},
 
-		modifyComplete() {
-			if (this.todoInput.trim() === '') {
+		modifyComplete(todoLabel) {
+			if (todoLabel.trim() === '') {
 				window.alert("입력란을 채워주세요!");
-				return;
+				return true;
 			}
-			todo.modify = false;
+			return false;
+		},
+
+		clickModifyButton(todoLabel, modifyStatus) {
+			if (modifyStatus && todoLabel.trim() != '') return false;
+			return true; 
 		},
 	},
 
