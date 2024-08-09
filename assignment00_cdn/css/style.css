@@ -54,6 +54,11 @@ table.todoList {
 	width: 100%;
 }
 
+button:active {
+	box-shadow: 2px 2px 0 rgba(253, 1, 1, 0.5);
+	position: relative;
+	top:2px;
+}
 
 
 tr:hover {
@@ -142,3 +147,4 @@ h1.noTodo {
 input.inputModify {
 	width: 80%;
 }
+
