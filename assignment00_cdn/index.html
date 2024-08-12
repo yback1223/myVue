@@ -10,7 +10,7 @@
 		<h1>Todo List</h1>
 		<div id="app">
 			<div>
-				<input 
+				<input
 					class="todoInput"
 					@keyup.enter="addTodo"
 					type="text"
@@ -25,7 +25,8 @@
 
 			<div class="tabs">
 				<button
-					v-for="tab in tabList" :key="tab.id"
+					v-for="tab in tabList" 
+					:key="tab.id"
 					@click.prevent="currentTabLabel = tab.label"
 					:class="{ tabClicked: currentTabLabel === tab.label }"
 				>
@@ -41,7 +42,8 @@
 				<tr 
 					class="trContents"				
 					v-for="todo in currentList"
-					:key="todo.index">
+					:key="todo.index"
+				>
 					<td class="tdContentInfo">
 						<input
 							class="todoCheckBox"
@@ -66,8 +68,7 @@
 							class="buttonModifyComplete"
 							v-if="todo.modify === true"
 							@click="todo.modify = modifyComplete(todo.label)"
-						>
-						</button>
+						></button>
 						<button
 							class="buttonDeleteOne"
 							@click="deleteTodo(todo.index)"
@@ -76,20 +77,25 @@
 							class="buttonModify"
 							@click="todo.modify = clickModifyButton(todo.label, todo.modify)"
 						></button>
-
 					</td>
 				</tr>
 			</table>
-
+			<button 
+				@click="checkAll"
+				v-if="currentTabLabel == '전체' || currentTabLabel == '미완료'"	
+			>
+				전체 완료 상태로 만들기
+			</button>
 			<button
 				@click="deleteChecked"
 				v-if="currentTabLabel != '미완료'"
 			>
-				체크 삭제
+				완료된 항목 삭제하기
 			</button>
 			<button 
 				class="buttonDeleteAll" 
 				@click="deleteAll"
+				v-if="currentTabLabel == '전체'"
 			>
 				전체 삭제
 			</button>

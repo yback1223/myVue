@@ -58,6 +58,20 @@ new Vue({
 			if (modifyStatus && todoLabel.trim() != '') return false;
 			return true; 
 		},
+		checkAll() {
+			var count = 0;
+			this.todos.forEach((todo) => {
+				if (todo.status) {
+					count++;	
+				}
+			})
+
+			if (count == this.todos.length) {
+				this.todos.forEach((todo) => todo.status = false);
+			} else {
+				this.todos.forEach((todo) => todo.status = true);
+			}
+		},
 	},
 
 	computed: {
