@@ -19,6 +19,7 @@ new Vue({
 		todos: JSON.parse(localStorage.getItem("todos")) || [],
 		todoInput: '',
 		modifyInput: '',
+		checkLabel: '전체 완료 상태로 만들기',
 		index: localStorage.getItem("index") || 0,
 	},
 
@@ -59,18 +60,13 @@ new Vue({
 			return true; 
 		},
 		checkAll() {
-			var count = 0;
-			this.todos.forEach((todo) => {
-				if (todo.status) {
-					count++;	
-				}
-			})
+			const allChecked = this.todos.every(todo => todo.status);
 
-			if (count == this.todos.length) {
-				this.todos.forEach((todo) => todo.status = false);
-			} else {
-				this.todos.forEach((todo) => todo.status = true);
-			}
+			this.checkLabel = !allChecked ? '전체 미완료 상태로 만들기' : '전체 완료 상태로 만들기';
+		
+			this.todos.forEach((todo) => {
+				todo.status = !allChecked;
+			});
 		},
 	},
 

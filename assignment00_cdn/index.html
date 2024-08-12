@@ -84,7 +84,7 @@
 				@click="checkAll"
 				v-if="currentTabLabel == '전체' || currentTabLabel == '미완료'"	
 			>
-				전체 완료 상태로 만들기
+				{{ this.checkLabel }}
 			</button>
 			<button
 				@click="deleteChecked"
