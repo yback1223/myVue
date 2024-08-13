@@ -73,16 +73,21 @@ new Vue({
 	computed: {
 		currentList() {
 			if (this.currentTabLabel === '전체') return this.todos;
-			else if (this.currentTabLabel === '미완료') return this.todos.filter(todo => !todo.status);
+			else if (this.currentTabLabel === '미완료') return this.notDoneList;
+			return this.doneList;
+		},
+		notDoneList() {
+			return this.todos.filter(todo => !todo.status);
+		},
+		doneList() {
 			return this.todos.filter(todo => todo.status);
-		}
+		},
 	},
 	
 	watch: {
 		todos: {
 			handler(newTodos) {
 				localStorage.setItem('todos', JSON.stringify(newTodos));
-				logLifecycleHook('updated');
 			},
 			deep: true
 		}

@@ -17,10 +17,7 @@
 					v-model.lazy="todoInput"
 					placeholder=" 할 일을 입력하세요."
 				>
-				<button 
-					class="buttonSubmit"
-					@click="addTodo"
-				></button>
+				<button class="buttonSubmit" @click="addTodo"></button>
 			</div>
 
 			<div class="tabs">
@@ -39,17 +36,9 @@
 					<th class="status">상태</th>
 					<th class="content">내용</th>
 				</tr>
-				<tr 
-					class="trContents"				
-					v-for="todo in currentList"
-					:key="todo.index"
-				>
+				<tr class="trContents" v-for="todo in currentList" :key="todo.index">
 					<td class="tdContentInfo">
-						<input
-							class="todoCheckBox"
-							type="checkbox"
-							v-model="todo.status"
-						>
+						<input class="todoCheckBox" type="checkbox" v-model="todo.status">
 					</td>
 					<td class="tdContent">
 						<span
@@ -69,10 +58,7 @@
 							v-if="todo.modify === true"
 							@click="todo.modify = modifyComplete(todo.label)"
 						></button>
-						<button
-							class="buttonDeleteOne"
-							@click="deleteTodo(todo.index)"
-						></button>
+						<button class="buttonDeleteOne" @click="deleteTodo(todo.index)"></button>
 						<button
 							class="buttonModify"
 							@click="todo.modify = clickModifyButton(todo.label, todo.modify)"
@@ -86,10 +72,7 @@
 			>
 				{{ this.checkLabel }}
 			</button>
-			<button
-				@click="deleteChecked"
-				v-if="currentTabLabel != '미완료'"
-			>
+			<button @click="deleteChecked" v-if="currentTabLabel != '미완료'">
 				완료된 항목 삭제하기
 			</button>
 			<button 
@@ -99,10 +82,7 @@
 			>
 				전체 삭제
 			</button>
-			<h1
-				class="noTodo"
-				v-if="todos.length === 0"
-			>
+			<h1 class="noTodo" v-if="todos.length === 0">
 				할! 일이 없습니다!
 			</h1>
 		</div>
