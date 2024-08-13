@@ -9,6 +9,7 @@ function logLifecycleHook(hook) {
 
 new Vue({
 	el: '#app',
+
 	data: {
 		tabList: [
 			{ id: 0, label: '전체' },
@@ -21,6 +22,8 @@ new Vue({
 		modifyInput: '',
 		checkLabel: '전체 완료 상태로 만들기',
 		index: localStorage.getItem("index") || 0,
+		isChecked: false,
+		isAllChecked: false,
 	},
 
 	methods: {
@@ -32,22 +35,25 @@ new Vue({
 			this.todos.push({
 				index: this.index++,
 				label: this.todoInput.trim(),
-				status: false,
+				status: 0,
+				isChecked: false,
 				modify: false,
 			});
-			localStorage.setItem('index', this.index);
 			this.todoInput = '';
 		},
+
 		deleteTodo(todoIndex) {
 			this.todos = this.todos.filter(todo => todo.index !== todoIndex);
 		},
 
 		deleteChecked() {
-			this.todos = this.todos.filter(todo => !todo.status);
+			this.todos = this.todos.filter(todo => !todo.isChecked);
 		},
+
 		deleteAll() {
 			this.todos = [];
 		},
+
 		modifyComplete(todo) {
 			if (!todo.trim()) {
 				window.alert("입력란을 채워주세요!");
@@ -55,32 +61,33 @@ new Vue({
 			}
 			return false;
 		},
-		clickModifyButton(todoLabel, modifyStatus) {
-			if (modifyStatus && todoLabel.trim() != '') return false;
-			return true; 
-		},
-		checkAll() {
-			const allChecked = this.todos.every(todo => todo.status);
 
-			this.checkLabel = !allChecked ? '전체 미완료 상태로 만들기' : '전체 완료 상태로 만들기';
-		
-			this.todos.forEach((todo) => {
-				todo.status = !allChecked;
+		clickModifyButton(todoLabel, modifyStatus) {
+			return modifyStatus && todoLabel.trim() != '' ? false : true;
+		},
+
+		checkAll(todoList) {
+			// const isAllChecked = todoList.every(todo => todo.isChecked);
+			
+			switch (isAllChecked) {
+				
+			}
+			todoList.forEach((todo) => {
+				todo.isChecked = !isAllChecked;
 			});
 		},
 	},
 
 	computed: {
 		currentList() {
-			if (this.currentTabLabel === '전체') return this.todos;
-			else if (this.currentTabLabel === '미완료') return this.notDoneList;
-			return this.doneList;
-		},
-		notDoneList() {
-			return this.todos.filter(todo => !todo.status);
-		},
-		doneList() {
-			return this.todos.filter(todo => todo.status);
+			switch(this.currentTabLabel) {
+				case '전체':
+					return this.todos;
+				case '미완료':
+					return this.todos.filter(todo => todo.status === 0);
+				case '완료':
+					return this.todos.filter(todo => todo.status === 1);
+			};
 		},
 	},
 	
@@ -90,7 +97,7 @@ new Vue({
 				localStorage.setItem('todos', JSON.stringify(newTodos));
 			},
 			deep: true
-		}
+		},
 	},
 	
 	

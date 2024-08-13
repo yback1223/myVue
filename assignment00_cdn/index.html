@@ -15,7 +15,7 @@
 					@keyup.enter="addTodo"
 					type="text"
 					v-model.lazy="todoInput"
-					placeholder=" 할 일을 입력하세요."
+					placeholder="할 일을 입력하세요."
 				>
 				<button class="buttonSubmit" @click="addTodo"></button>
 			</div>
@@ -31,20 +31,18 @@
 				</button>
 			</div>
 
-			<table class="todoList">
-				<tr class="trContentsInfo">
-					<th class="status">상태</th>
-					<th class="content">내용</th>
-				</tr>
-				<tr class="trContents" v-for="todo in currentList" :key="todo.index">
-					<td class="tdContentInfo">
-						<input class="todoCheckBox" type="checkbox" v-model="todo.status">
-					</td>
-					<td class="tdContent">
-						<span
-							:class="{ todoDone : todo.status, todoSpan : !todo.status }"
-							v-if="todo.modify === false"
-						>
+			<ul class="todoList">
+				<label class="allCheckLabel">
+					<input type="checkbox" class="todoCheckBox" v-model="isAllChecked">
+					전체 선택
+				</label>
+
+				<li class="liContents" v-for="todo in currentList" :key="todo.index">
+					<span class="liContentInfo">
+						<input class="todoCheckBox" type="checkbox" v-model="todo.isChecked">
+					</span>
+					<span class="liContent">
+						<span :class="todo.status ? 'todoDone' : 'todoSpan'" v-if="todo.modify === false">
 							{{ todo.label }}
 						</span>
 						<input
@@ -63,24 +61,18 @@
 							class="buttonModify"
 							@click="todo.modify = clickModifyButton(todo.label, todo.modify)"
 						></button>
-					</td>
-				</tr>
-			</table>
-			<button 
-				@click="checkAll"
-				v-if="currentTabLabel == '전체' || currentTabLabel == '미완료'"	
-			>
-				{{ this.checkLabel }}
-			</button>
+					</span>
+				</li>
+			</ul>
 			<button @click="deleteChecked" v-if="currentTabLabel != '미완료'">
-				완료된 항목 삭제하기
+				체크 삭제
 			</button>
 			<button 
 				class="buttonDeleteAll" 
 				@click="deleteAll"
 				v-if="currentTabLabel == '전체'"
 			>
-				전체 삭제
+				초기화
 			</button>
 			<h1 class="noTodo" v-if="todos.length === 0">
 				할! 일이 없습니다!

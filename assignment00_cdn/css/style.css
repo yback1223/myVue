@@ -9,7 +9,7 @@ input.todoCheckBox {
 }
 
 input.todoCheckBox:checked {
-	content:'✔';
+	content: '✔';
 	width: 20px;
 	height: 20px;
 	/* border: 1px solid #e564ec; */
@@ -19,60 +19,72 @@ input.todoCheckBox:checked {
 }
 
 html, body {
-    height: 100%;
+	height: 100%;
+	width: 80%;
 }
 
 html {
-    display: table;
-    margin: auto;
+	display: table;
+	margin: auto;
 }
 
 body {
 	background: rgb(0, 0, 0);
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 input.todoInput {
-    width: 85%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-
+	width: 85%;
+	padding: 10px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
 }
 
 .tabClicked {
 	background: rgb(0, 0, 0);
-	color: rgb(255, 255, 255)
+	color: rgb(255, 255, 255);
 }
 
-table.todoList {
+ul.todoList {
 	background: rgb(255, 255, 255);
 	width: 100%;
+	list-style-type: none;
+	padding: 0;
+	margin: 1%;
 }
 
-button:active {
-	box-shadow: 2px 2px 0 rgb(255, 255, 255);
-	position: relative;
-	top:2px;
-}
-
-
-tr:hover {
+li.liContentsInfo {
+	display: flex;
+	padding: 10px;
 	background-color: rgb(0, 0, 0);
-}
-
-th.status {
-	width: 50px;
-}
-
-th.content {
-	width: 500px;
-}
-
-th {
-	height: 70px;
-	background: rgb(0, 0, 0);
 	color: white;
+	font-weight: bold;
+}
+
+li.liContents {
+	display: flex;
+	padding: 6px;
+	border-top: 1px solid #ccc;
+	align-items: center;
+}
+
+li.liContents:hover {
+	background-color: rgb(0, 0, 0);
+	color: white;
+}
+
+li.liContentInfo {
+	width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+li.liContent {
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .todoSpan {
@@ -89,24 +101,24 @@ h1 {
 }
 
 button.buttonSubmit {
-    width: 3rem;
-    height: 3rem;
-    border:none;
-    border-radius:10%;
+	width: 3rem;
+	height: 3rem;
+	border: none;
+	border-radius: 10%;
 	cursor: pointer;
 	float: right;
-	background: url( "https://cdn-icons-png.flaticon.com/128/2680/2680985.png" ) no-repeat;
+	background: url("https://cdn-icons-png.flaticon.com/128/2680/2680985.png") no-repeat;
 	background-size: contain;
 }
 
 button.buttonDeleteOne {
-    width: 2rem;
-    height: 2rem;
-    border:none;
-    border-radius:10%;
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	border-radius: 10%;
 	cursor: pointer;
 	float: right;
-	background: url( "https://cdn-icons-png.flaticon.com/128/8661/8661494.png" ) no-repeat;
+	background: url("https://cdn-icons-png.flaticon.com/128/8661/8661494.png") no-repeat;
 	background-size: contain;
 }
 
@@ -116,23 +128,23 @@ button.buttonDeleteAll {
 }
 
 button.buttonModify {
-    width: 2rem;
-    height: 2rem;
-    border:none;
-    border-radius:10%;
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	border-radius: 10%;
 	cursor: pointer;
 	float: right;
-	background: url( "https://cdn-icons-png.flaticon.com/128/1046/1046244.png" ) no-repeat;
+	background: url("https://cdn-icons-png.flaticon.com/128/1046/1046244.png") no-repeat;
 	background-size: contain;
 }
 
 button.buttonModifyComplete {
 	width: 1.2rem;
-    height: 1.2rem;
-    border:none;
-    border-radius:10%;
+	height: 1.2rem;
+	border: none;
+	border-radius: 10%;
 	cursor: pointer;
-	background: url( "https://img.icons8.com/?size=160&id=u6BofCIYf5rg&format=png" ) no-repeat;
+	background: url("https://img.icons8.com/?size=160&id=u6BofCIYf5rg&format=png") no-repeat;
 	background-size: contain;
 }
 
@@ -151,4 +163,11 @@ div.tabs {
 
 div.tabs button {
 	width: 29.5%;
+}
+
+.allCheckLabel {
+	background: white;
+	display: block;
+	margin-bottom: 10px;
+	padding-left: 10px;
 }
