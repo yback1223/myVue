@@ -24,6 +24,7 @@ new Vue({
 		index: localStorage.getItem("index") || 0,
 		isChecked: false,
 		isAllChecked: false,
+		moveButtonLabel: '',
 	},
 
 	methods: {
@@ -39,6 +40,8 @@ new Vue({
 				isChecked: false,
 				modify: false,
 			});
+			localStorage.setItem('index', this.index);
+			this.isAllChecked = false;
 			this.todoInput = '';
 		},
 
@@ -66,16 +69,42 @@ new Vue({
 			return modifyStatus && todoLabel.trim() != '' ? false : true;
 		},
 
-		checkAll(todoList) {
-			// const isAllChecked = todoList.every(todo => todo.isChecked);
-			
-			switch (isAllChecked) {
-				
-			}
-			todoList.forEach((todo) => {
-				todo.isChecked = !isAllChecked;
-			});
+		initCurrentTab(tabLabel) {
+			this.isAllChecked = true;
+			this.checkAll();
+			this.isAllChecked = false;
+
+			this.currentTabLabel = tabLabel;
 		},
+
+		moveTodo(todoIndex) {
+			switch (this.currentTabLabel) {
+				case '미완료':
+					{
+						const targetTodo = this.todos.find(todo => todo.index === todoIndex);
+						targetTodo.status = 1;
+						break;
+					}
+				case '완료':
+					{
+						const targetTodo = this.todos.find(todo => todo.index === todoIndex);
+						targetTodo.status = 0;
+						break;
+					}
+			}
+		},
+
+		checkAll() {
+			switch (this.isAllChecked) {
+				case true:
+					this.todos.forEach((todo) => todo.isChecked = false);
+					break;
+				case false:
+					this.todos.forEach((todo) => todo.isChecked = true);
+					break;
+			}
+		}
+		
 	},
 
 	computed: {
@@ -98,6 +127,19 @@ new Vue({
 			},
 			deep: true
 		},
+		currentTabLabel: {
+			handler(label) {
+
+				switch (label) {
+					case '미완료':
+						this.moveButtonLabel = '완료로 이동';
+						break;
+					case '완료':
+						this.moveButtonLabel = '미완료로 이동';
+						break;
+				}
+			}
+		}
 	},
 	
 	

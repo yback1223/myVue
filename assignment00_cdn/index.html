@@ -24,7 +24,7 @@
 				<button
 					v-for="tab in tabList" 
 					:key="tab.id"
-					@click.prevent="currentTabLabel = tab.label"
+					@click="initCurrentTab(tab.label)"
 					:class="{ tabClicked: currentTabLabel === tab.label }"
 				>
 					{{ tab.label }}
@@ -33,7 +33,7 @@
 
 			<ul class="todoList">
 				<label class="allCheckLabel">
-					<input type="checkbox" class="todoCheckBox" v-model="isAllChecked">
+					<input type="checkbox" class="todoCheckBox" v-model="isAllChecked" @click="checkAll">
 					전체 선택
 				</label>
 
@@ -45,6 +45,9 @@
 						<span :class="todo.status ? 'todoDone' : 'todoSpan'" v-if="todo.modify === false">
 							{{ todo.label }}
 						</span>
+						<button v-if="currentTabLabel !== '전체'" @click="moveTodo(todo.index)">
+							{{ moveButtonLabel }}
+						</button>
 						<input
 							class="inputModify"
 							v-if="todo.modify === true"
