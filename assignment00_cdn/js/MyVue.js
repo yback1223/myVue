@@ -18,13 +18,9 @@ new Vue({
 		],
 		currentTabLabel: '전체',
 		todos: JSON.parse(localStorage.getItem("todos")) || [],
-		todoInput: '',
-		modifyInput: '',
-		checkLabel: '전체 완료 상태로 만들기',
 		index: localStorage.getItem("index") || 0,
-		isChecked: false,
+		todoInput: '',
 		isAllChecked: false,
-		moveButtonLabel: '',
 	},
 
 	methods: {
@@ -102,13 +98,17 @@ new Vue({
 					this.todos.forEach((todo) => todo.isChecked = true);
 					break;
 			}
-		}
+		},
+
+		getMoveButtonLabel(todo) {
+			return todo.status === 0 ? '완료로 이동' : '미완료로 이동';
+		  }
 		
 	},
 
 	computed: {
 		currentList() {
-			switch(this.currentTabLabel) {
+			switch (this.currentTabLabel) {
 				case '전체':
 					return this.todos;
 				case '미완료':
@@ -131,19 +131,6 @@ new Vue({
 				localStorage.setItem('index', JSON.stringify(newIndex));
 			}
 		},
-		currentTabLabel: {
-			handler(label) {
-
-				switch (label) {
-					case '미완료':
-						this.moveButtonLabel = '완료로 이동';
-						break;
-					case '완료':
-						this.moveButtonLabel = '미완료로 이동';
-						break;
-				}
-			}
-		}
 	},
 	
 	

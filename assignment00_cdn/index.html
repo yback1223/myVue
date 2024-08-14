@@ -45,8 +45,8 @@
 						<span :class="todo.status ? 'todoDone' : 'todoSpan'" v-if="todo.modify === false">
 							{{ todo.label }}
 						</span>
-						<button v-if="currentTabLabel !== '전체'" @click="moveTodo(todo.index)">
-							{{ moveButtonLabel }}
+						<button @click="moveTodo(todo.index)">
+							{{ getMoveButtonLabel(todo) }}
 						</button>
 						<input
 							class="inputModify"
