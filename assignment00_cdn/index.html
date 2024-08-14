@@ -42,10 +42,10 @@
 						<input class="todoCheckBox" type="checkbox" v-model="todo.isChecked">
 					</span>
 					<span class="liContent">
-						<span :class="todo.status ? 'todoDone' : 'todoSpan'" v-if="todo.modify === false">
+						<span :class="todo.status ? 'todoDone' : 'todoSpan'" v-if="!todo.modify">
 							{{ todo.label }}
 						</span>
-						<button @click="moveTodo(todo.index)">
+						<button @click="moveTodo(todo.index)" v-if="!todo.modify">
 							{{ getMoveButtonLabel(todo) }}
 						</button>
 						<input
