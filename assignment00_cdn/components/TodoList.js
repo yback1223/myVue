@@ -1,51 +1,83 @@
 Vue.component('todo-list', {
 	template: `
-		<div>
-			<ul class="todoList">
-				<label class="allCheckLabel">
-					<input
-						type="checkbox"
-						class="todoCheckBox"
-						v-model="isAllChecked"
-						@change="handleCheck"
-					>
-				</label>
-				<li v-for="todo in todos" :key="todo.index">
-					<todo-item :todo="todo" @delete-todo="deleteTodo" @update-todo="updateTodo"></todo-item>
-				</li>
-			</ul>
-		</div>
+	<div>
+		<label class="allCheckLabel">
+		<input type="checkbox" class="todoCheckBox" v-model="isAllChecked" @click="checkAll">
+			전체 선택
+		</label>
+		<ul class="todoList">
+		<li v-for="todo in currentList" :key="todo.index">
+			<todo-item 
+				:todo="todo" 
+				@delete-todo="deleteTodo"
+				@update-todo="updateTodo"
+				@move-todo="moveTodo"
+			></todo-item>
+		</li>
+		</ul>
+	</div>
 	`,
-
-	data: function() {
-		return {
-			isAllChecked: false,
-		}
-	},
-
-	methods: {
-		handleCheck() {
-			this.todos.forEach(todo => {
-				todo.isChecked = this.isAllChecked;
-			});
-		},
-		deleteTodo(index) {
-			this.todos = this.todos.filter(todo => todo.index !== index);
-		},
-		updateTodo(updatedTodo) {
-			let todo = this.todos.find(todo => todo.index === updatedTodo.index);
-			if (todo) {
-				Object.assign(todo, updatedTodo);
-			}
-		}
-	},
-
 	props: {
 		todos: {
 			type: Array,
-			required: true
+			required: true,
+		},
+		currentTab: {
+			type: String,
+			required: true,
+		},
+		isAdded: {
+			type: Boolean,
+			required: true,
+		},
+	},
+	data() {
+		return {
+			isAllChecked: false
+		};
+	},
+	computed: {
+		currentList() {
+			switch (this.currentTab) {
+			case '전체':
+				return this.todos;
+			case '미완료':
+				return this.todos.filter(todo => todo.status === 0);
+			case '완료':
+				return this.todos.filter(todo => todo.status === 1);
+			}
 		}
 	},
-
-	
-})
+	methods: {
+		checkAll() {
+			switch (this.isAllChecked) {
+				case true:
+					this.currentList.forEach((todo) => todo.isChecked = false);
+					break;
+				case false:
+					this.currentList.forEach((todo) => todo.isChecked = true);
+					break;
+			}
+		},
+		deleteTodo(index) {
+			this.$emit('delete-todo', index);
+		},
+		updateTodo(updatedTodo) {
+			this.$emit('update-todo', updatedTodo);
+		},
+		moveTodo(todoIndex) {
+			this.$emit('move-todo', todoIndex);
+		}
+	},
+	watch: {
+		currentTab(newTab) {
+			this.isAllChecked = true;
+			this.checkAll();
+			this.isAllChecked = false;
+		},
+		isAdded(newTodo) {
+			this.isAllChecked = false;
+			this.$emit('done-adding');
+		}
+	}
+});

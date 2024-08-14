@@ -98,7 +98,7 @@ new Vue({
 
 		getMoveButtonLabel(todo) {
 			return todo.status === 0 ? '완료로 이동' : '미완료로 이동';
-		  }
+		}
 		
 	},
 

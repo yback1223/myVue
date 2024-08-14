@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="css/style.css">
 		<title>yback todolist cdn</title>
@@ -10,32 +10,11 @@
 		<script src="./components/TodoList.js"></script>
 		<script src="./components/TodoInput.js"></script>
 		<script src="./components/TodoListTabs.js"></script>
-		<script src="./components/TodoListBody.js"></script>
 	</head>
 	<body>
 		<h1>Todo List</h1>
-		<div id="app">
-			<todo-list-body></todo-list-body>
-			<!-- <button @click="deleteChecked" v-if="currentTabLabel != '미완료'">
-				체크 삭제
-			</button>
-			<button 
-				class="buttonDeleteAll" 
-				@click="deleteAll"
-				v-if="currentTabLabel == '전체'"
-			>
-				초기화
-			</button>
-			<h1 class="noTodo" v-if="todos.length === 0">
-				할! 일이 없습니다!
-			</h1> -->
-		</div>
-		<script>
-			new Vue({
-				el: '#app',
-			});
-		</script>
+		<div id="app"></div>
+		<script src="./components/App.js"></script>
 
-		<!-- <script src="./js/MyVue.js"></script> -->
 	</body>
 </html>

@@ -11,16 +11,19 @@ Vue.component('todo-input', {
 			<button class="buttonSubmit" @click="addTodo"></button>
 		</div>
 	`,
-	data: function() {
+	data() {
 		return {
 			todoInput: '',
-		}
-	}
-	,
+		};
+	},
 	methods: {
-		addTodo: function() {
-			this.$emit('get-todo-input', this.todoInput);
+		addTodo() {
+			if (!this.todoInput.trim()) {
+				alert("할 일을 입력하세요!");
+				return;
+			}
+			this.$emit('add-todo', this.todoInput.trim());
 			this.todoInput = '';
 		}
-	},
-})
+	}
+});
