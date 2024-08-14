@@ -40,7 +40,6 @@ new Vue({
 				isChecked: false,
 				modify: false,
 			});
-			localStorage.setItem('index', this.index);
 			this.isAllChecked = false;
 			this.todoInput = '';
 		},
@@ -55,6 +54,7 @@ new Vue({
 
 		deleteAll() {
 			this.todos = [];
+			this.index = 0;
 		},
 
 		modifyComplete(todo) {
@@ -73,7 +73,6 @@ new Vue({
 			this.isAllChecked = true;
 			this.checkAll();
 			this.isAllChecked = false;
-
 			this.currentTabLabel = tabLabel;
 		},
 
@@ -126,6 +125,11 @@ new Vue({
 				localStorage.setItem('todos', JSON.stringify(newTodos));
 			},
 			deep: true
+		},
+		index: {
+			handler(newIndex) {
+				localStorage.setItem('index', JSON.stringify(newIndex));
+			}
 		},
 		currentTabLabel: {
 			handler(label) {
