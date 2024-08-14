@@ -46,6 +46,7 @@ new Vue({
 
 		deleteChecked() {
 			this.todos = this.todos.filter(todo => !todo.isChecked);
+			this.isAllChecked = false;
 		},
 
 		deleteAll() {
@@ -73,29 +74,24 @@ new Vue({
 		},
 
 		moveTodo(todoIndex) {
-			switch (this.currentTabLabel) {
-				case '미완료':
-					{
-						const targetTodo = this.todos.find(todo => todo.index === todoIndex);
-						targetTodo.status = 1;
-						break;
-					}
-				case '완료':
-					{
-						const targetTodo = this.todos.find(todo => todo.index === todoIndex);
-						targetTodo.status = 0;
-						break;
-					}
+			const targetTodo = this.todos.find(todo => todo.index === todoIndex);
+			switch (targetTodo.status) {
+				case 0:
+					targetTodo.status = 1;
+					break;
+				case 1:
+					targetTodo.status = 0;
+					break;
 			}
 		},
 
 		checkAll() {
 			switch (this.isAllChecked) {
 				case true:
-					this.todos.forEach((todo) => todo.isChecked = false);
+					this.currentList.forEach((todo) => todo.isChecked = false);
 					break;
 				case false:
-					this.todos.forEach((todo) => todo.isChecked = true);
+					this.currentList.forEach((todo) => todo.isChecked = true);
 					break;
 			}
 		},
