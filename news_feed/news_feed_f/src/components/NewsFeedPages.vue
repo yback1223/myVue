@@ -2,8 +2,10 @@
 	<div>
 		<div
 			v-if="paginatedArticles.length">
-			<news-feed-article v-for="article in paginatedArticles" :key="article._id"
-			:article="article">
+			<news-feed-article
+				v-for="article in paginatedArticles"
+				:key="article._id"
+				:article="article">
 			</news-feed-article>
 		</div>
 		<div v-if="pageCount > 1">
